@@ -1,0 +1,45 @@
+# Required Images for Portfolio
+
+## Background Images
+1. assets/images/background/hero-bg.jpg - A modern, clean tech/coding background for hero section
+2. assets/images/background/projects-bg.jpg - Background for projects section
+3. assets/images/background/about-bg.jpg - Background for about section
+4. assets/images/background/contact-bg.jpg - Background for contact section
+
+## Profile Images
+1. assets/images/profile/aj.jpeg - Already copied profile image
+
+## Project Images
+1. assets/images/projects/car-rental-thumb.jpg - Car Rental Project thumbnail
+2. assets/images/projects/other-projects-thumb.jpg - Other projects thumbnail
+3. assets/images/projects/car-rental-user/ - Screenshots of user app
+   - user-login.jpg
+   - user-home.jpg
+   - user-book-car.jpg
+   - user-booking-status.jpg
+   - user-track.jpg
+   - user-profile.jpg
+   - user-edit-profile.jpg
+4. assets/images/projects/car-rental-admin/ - Screenshots of admin app
+   - admin-home.jpg
+   - admin-manage-booking.jpg
+   - admin-add-branch.jpg
+   - admin-add-car.jpg
+   - admin-profile.jpg
+   - admin-user-management.jpg
+   - admin-car-dashboard.jpg
+
+## Skill Icons (SVG preferred)
+1. assets/images/skills/android.svg - Android development
+2. assets/images/skills/data-analytics.svg - Data analytics
+3. assets/images/skills/problem-solving.svg - Problem solving
+4. assets/images/skills/finance.svg - Finance and stock market
+
+## UI/Social Icons
+1. assets/images/icons/social/linkedin.svg
+2. assets/images/icons/social/github.svg
+3. assets/images/icons/social/instagram.svg
+4. assets/images/icons/social/email.svg
+5. assets/images/icons/ui/arrow-right.svg
+6. assets/images/icons/ui/close.svg
+7. assets/images/icons/ui/menu.svg 
