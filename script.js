@@ -302,29 +302,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         };
-
-        // Initialize User App Swiper
-        const userSwiper = new Swiper('.project-screenshots', swiperConfigs);
+    
+        // Initialize User App Swiper with the new class name
+        const userSwiper = new Swiper('.user-screenshots', swiperConfigs);
         
         // Initialize Admin App Swiper
         const adminSwiper = new Swiper('.admin-screenshots', swiperConfigs);
-
+    
         return { userSwiper, adminSwiper };
     }
 
     // Project Tabs Functionality
     function initProjectTabs() {
-    const tabs = document.querySelectorAll('.tab');
+        const tabs = document.querySelectorAll('.tab');
         const contents = document.querySelectorAll('.project-content');
-        let swipers = null;
-
-        // Initialize swipers after a small delay to ensure DOM is ready
-        setTimeout(() => {
-            swipers = initProjectSwipers();
-        }, 50);
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
                 const targetId = tab.getAttribute('data-tab');
             
             // Remove active class from all tabs and contents
@@ -336,9 +330,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetContent = document.getElementById(`${targetId}-content`);
                 targetContent.classList.add('active');
                 
-                // Update Swiper instances
-                if (swipers) {
-                    setTimeout(() => {
+                // Update Swiper instances with a slightly longer delay
+                setTimeout(() => {
+                    if (swipers) {
                         if (targetId === 'user-app') {
                             swipers.userSwiper.update();
                             swipers.userSwiper.slideToLoop(0);
@@ -346,11 +340,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             swipers.adminSwiper.update();
                             swipers.adminSwiper.slideToLoop(0);
                         }
-                    }, 50);
-                }
+                    }
+                }, 150); // Increased delay for better reliability
             });
         });
-
+    
         // Set initial active state
         const initialTab = document.querySelector('.tab.active');
         if (initialTab) {
@@ -359,12 +353,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Run animations on scroll
+    // Technology items animation
+    const techItems = document.querySelectorAll('.tech-item');
+    
+    function animateTechItems() {
+    techItems.forEach((item, index) => {
+    const itemTop = item.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (itemTop < windowHeight * 0.85) {
+    setTimeout(() => {
+    item.style.opacity = '1';
+    item.style.transform = 'translateY(0)';
+    }, index * 50);
+    }
+    });
+    }
+    
+    // Add this to your existing checkAnimations function
     function checkAnimations() {
-        animateTimeline();
-        animateSkillBars();
-        animateProjectCards();
-        animateContactItems();
-        animateProjectShowcase();
+    animateTimeline();
+    animateSkillBars();
+    animateProjectCards();
+    animateContactItems();
+    animateProjectShowcase();
+    animateTechItems(); // Add this line
     }
     
     // Check animations on load and scroll
@@ -372,10 +385,20 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', checkAnimations);
     
     // Initialize Swiper for project screenshots
-    initProjectSwipers();
+    let swipers = initProjectSwipers();
     
     // Initialize project tabs
     initProjectTabs();
+    
+    // Add resize event handler to update swipers
+    window.addEventListener('resize', function() {
+        if (swipers) {
+            setTimeout(() => {
+                swipers.userSwiper.update();
+                swipers.adminSwiper.update();
+            }, 100);
+        }
+    });
     
     // Intersection Observer for fade-in animations
     const observerOptions = {
@@ -551,4 +574,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
             });
     });
-}); 
+});
