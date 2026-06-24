@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Active Navigation Link
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
     function setActiveLink() {
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-links');
-    
+
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function type() {
         const currentRole = roles[roleIndex];
-        
+
         if (isDeleting) {
             typingText.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             charIndex++;
             typingDelay = 200;
         }
-        
+
         if (!isDeleting && charIndex === currentRole.length) {
             isDeleting = true;
             typingDelay = newTextDelay;
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             roleIndex = (roleIndex + 1) % roles.length;
             typingDelay = 500;
         }
-        
+
         setTimeout(type, typingDelay);
     }
 
@@ -106,19 +106,19 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(type, newTextDelay);
         }
     };
-    
+
     // Sticky header on scroll
     const header = document.querySelector('header');
     let lastScroll = 0;
-    
+
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-        
+
         if (currentScroll <= 0) {
             header.classList.remove('scroll-up');
             return;
         }
-        
+
         if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
             // Scroll down
             header.classList.remove('scroll-up');
@@ -128,78 +128,78 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.remove('scroll-down');
             header.classList.add('scroll-up');
         }
-        
+
         lastScroll = currentScroll;
     });
-    
+
     // Form submission handling
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             // Form is now handled by FormSubmit service
             // Keep the default form submission behavior
         });
     }
-    
+
     // Timeline animation
     const timelineItems = document.querySelectorAll('.timeline-item');
-    
+
     function animateTimeline() {
         timelineItems.forEach(item => {
             const itemTop = item.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
-            
+
             if (itemTop < windowHeight * 0.8) {
                 item.classList.add('animate');
             }
         });
     }
-    
+
     // Skill progress bars animation
     const skillBars = document.querySelectorAll('.skill-progress-bar');
     let skillBarsAnimated = false;
-    
+
     function resetSkillBars() {
         skillBars.forEach(bar => {
             const originalWidth = bar.getAttribute('data-width') || bar.style.width;
-            
+
             // Save the original width as data attribute
             if (!bar.getAttribute('data-width')) {
                 bar.setAttribute('data-width', originalWidth);
             }
-            
+
             // Reset to 0 initially
             bar.style.width = '0%';
         });
     }
-    
+
     function animateSkillBars() {
         skillBars.forEach(bar => {
             const barTop = bar.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
-            
+
             if (barTop < windowHeight * 0.8 && bar.style.width === '0%') {
                 const originalWidth = bar.getAttribute('data-width');
-                
+
                 setTimeout(() => {
                     bar.style.width = originalWidth;
                 }, 100);
             }
         });
     }
-    
+
     // Reset skill bars initially
     resetSkillBars();
-    
+
     // Project cards animation
     const projectCards = document.querySelectorAll('.project-card');
-    
+
     function animateProjectCards() {
         if (projectCards.length > 0) {
             projectCards.forEach((card, index) => {
                 const cardTop = card.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                
+
                 if (cardTop < windowHeight * 0.8) {
                     setTimeout(() => {
                         card.style.opacity = '1';
@@ -209,15 +209,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    
+
     // Contact items animation
     const contactItems = document.querySelectorAll('.contact-item, .social-link-item');
-    
+
     function animateContactItems() {
         contactItems.forEach((item, index) => {
             const itemTop = item.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
-            
+
             if (itemTop < windowHeight * 0.8) {
                 setTimeout(() => {
                     item.style.opacity = '1';
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Set initial styles for animations
     if (projectCards.length > 0) {
         projectCards.forEach(card => {
@@ -235,129 +235,119 @@ document.addEventListener('DOMContentLoaded', function() {
             card.style.transition = 'all 0.6s ease-out';
         });
     }
-    
+
     contactItems.forEach(item => {
         item.style.opacity = '0';
         item.style.transform = 'translateY(20px)';
         item.style.transition = 'all 0.4s ease-out';
     });
-    
+
     // Project showcase animation
-    const projectShowcase = document.querySelector('.project-showcase');
-    if (projectShowcase) {
-        projectShowcase.style.opacity = '0';
-        projectShowcase.style.transform = 'translateY(30px)';
-        projectShowcase.style.transition = 'all 0.8s ease-out';
-    }
-    
+    const projectShowcases = document.querySelectorAll('.project-showcase');
+    projectShowcases.forEach(showcase => {
+        showcase.style.opacity = '0';
+        showcase.style.transform = 'translateY(30px)';
+        showcase.style.transition = 'all 0.8s ease-out';
+    });
+
     function animateProjectShowcase() {
-        if (projectShowcase) {
-            const showcaseTop = projectShowcase.getBoundingClientRect().top;
+        projectShowcases.forEach(showcase => {
+            const showcaseTop = showcase.getBoundingClientRect().top;
             const windowHeight = window.innerHeight;
-            
+
             if (showcaseTop < windowHeight * 0.9) {
-                projectShowcase.style.opacity = '1';
-                projectShowcase.style.transform = 'translateY(0)';
+                showcase.style.opacity = '1';
+                showcase.style.transform = 'translateY(0)';
             }
-        }
+        });
     }
-    
-    // Initialize Swiper for project screenshots
-    function initProjectSwipers() {
-        const swiperConfigs = {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            centeredSlides: true,
-            loop: true,
-            autoHeight: true,
-            speed: 1600,
-            preloadImages: true,
-            lazy: {
-                loadPrevNext: true,
-                loadPrevNextAmount: 2
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-                dynamicBullets: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            on: {
-                init: function () {
-                    setTimeout(() => {
-                        this.update();
-                    }, 50);
+
+    // Initialize Swiper for project screenshots within a showcase
+    function initProjectSwipers(showcase) {
+        const swipers = [];
+
+        showcase.querySelectorAll('.swiper').forEach(swiperEl => {
+            const swiper = new Swiper(swiperEl, {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                centeredSlides: true,
+                loop: true,
+                autoHeight: true,
+                speed: 1600,
+                preloadImages: true,
+                lazy: {
+                    loadPrevNext: true,
+                    loadPrevNextAmount: 2
                 },
-                slideChange: function () {
-                    setTimeout(() => {
-                        this.update();
-                    }, 50);
-                }
-            }
-        };
-
-        // Initialize User App Swiper
-        const userSwiper = new Swiper('.project-screenshots', swiperConfigs);
-        
-        // Initialize Admin App Swiper
-        const adminSwiper = new Swiper('.admin-screenshots', swiperConfigs);
-
-        return { userSwiper, adminSwiper };
-    }
-
-    // Project Tabs Functionality
-    function initProjectTabs() {
-    const tabs = document.querySelectorAll('.tab');
-        const contents = document.querySelectorAll('.project-content');
-        let swipers = null;
-
-        // Initialize swipers after a small delay to ensure DOM is ready
-        setTimeout(() => {
-            swipers = initProjectSwipers();
-        }, 50);
-    
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-                const targetId = tab.getAttribute('data-tab');
-            
-            // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-                contents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab and corresponding content
-            tab.classList.add('active');
-                const targetContent = document.getElementById(`${targetId}-content`);
-                targetContent.classList.add('active');
-                
-                // Update Swiper instances
-                if (swipers) {
-                    setTimeout(() => {
-                        if (targetId === 'user-app') {
-                            swipers.userSwiper.update();
-                            swipers.userSwiper.slideToLoop(0);
-                        } else if (targetId === 'admin-app') {
-                            swipers.adminSwiper.update();
-                            swipers.adminSwiper.slideToLoop(0);
-                        }
-                    }, 50);
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+                pagination: {
+                    el: swiperEl.querySelector('.swiper-pagination'),
+                    clickable: true,
+                    dynamicBullets: true
+                },
+                navigation: {
+                    nextEl: swiperEl.querySelector('.swiper-button-next'),
+                    prevEl: swiperEl.querySelector('.swiper-button-prev')
+                },
+                on: {
+                    init: function () {
+                        setTimeout(() => {
+                            this.update();
+                        }, 50);
+                    },
+                    slideChange: function () {
+                        setTimeout(() => {
+                            this.update();
+                        }, 50);
+                    }
                 }
             });
+            swipers.push(swiper);
         });
 
-        // Set initial active state
-        const initialTab = document.querySelector('.tab.active');
-        if (initialTab) {
-            initialTab.click();
-        }
+        return swipers;
     }
-    
+
+    // Project Tabs Functionality (scoped per showcase)
+    function initProjectTabs() {
+        document.querySelectorAll('.project-showcase').forEach(showcase => {
+            const tabs = showcase.querySelectorAll('.tab');
+            const contents = showcase.querySelectorAll('.project-content');
+            let swipers = [];
+
+            setTimeout(() => {
+                swipers = initProjectSwipers(showcase);
+            }, 50);
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-tab');
+
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    const targetContent = showcase.querySelector(`#${targetId}-content`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+
+                    if (swipers.length > 0) {
+                        setTimeout(() => {
+                            swipers.forEach(swiper => {
+                                swiper.update();
+                                swiper.slideToLoop(0);
+                            });
+                        }, 50);
+                    }
+                });
+            });
+        });
+    }
+
     // Run animations on scroll
     function checkAnimations() {
         animateTimeline();
@@ -366,17 +356,14 @@ document.addEventListener('DOMContentLoaded', function() {
         animateContactItems();
         animateProjectShowcase();
     }
-    
+
     // Check animations on load and scroll
     checkAnimations();
     window.addEventListener('scroll', checkAnimations);
-    
-    // Initialize Swiper for project screenshots
-    initProjectSwipers();
-    
+
     // Initialize project tabs
     initProjectTabs();
-    
+
     // Intersection Observer for fade-in animations
     const observerOptions = {
         root: null,
@@ -466,31 +453,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.head.appendChild(style);
 
-    // Initialize Swiper for project images if it exists
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.swiper', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            }
-        });
-    }
-
     // Typing animation for hero section
     function setupTypingAnimation() {
         const words = document.querySelectorAll('.words span');
@@ -506,22 +468,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Initialize EmailJS
-    (function() {
+    (function () {
         emailjs.init("9InHMbMXWm7JBJQTb"); // Replace with your EmailJS public key
     })();
 
     // Contact form handling
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
+    document.getElementById('contact-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
         const successMessage = document.getElementById('success-message');
         const errorMessage = document.getElementById('error-message');
         const submitButton = this.querySelector('button[type="submit"]');
-        
+
         // Disable the submit button and show loading state
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
+
         // Hide any previous messages
         successMessage.style.display = 'none';
         errorMessage.style.display = 'none';
@@ -535,17 +497,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Send the email using EmailJS
         emailjs.send('service_1pt79rr', 'template_5l6p27w', templateParams)
-            .then(function() {
+            .then(function () {
                 // Show success message
                 successMessage.style.display = 'block';
                 // Reset form
                 document.getElementById('contact-form').reset();
-            }, function(error) {
+            }, function (error) {
                 // Show error message
                 errorMessage.style.display = 'block';
                 console.log('Failed to send message:', error);
             })
-            .finally(function() {
+            .finally(function () {
                 // Re-enable the submit button and restore original text
                 submitButton.disabled = false;
                 submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
