@@ -349,20 +349,45 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Run animations on scroll
+    // Technology items animation
+    const techItems = document.querySelectorAll('.tech-item');
+    
+    function animateTechItems() {
+    techItems.forEach((item, index) => {
+    const itemTop = item.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    
+    if (itemTop < windowHeight * 0.85) {
+    setTimeout(() => {
+    item.style.opacity = '1';
+    item.style.transform = 'translateY(0)';
+    }, index * 50);
+    }
+    });
+    }
+    
+    // Add this to your existing checkAnimations function
     function checkAnimations() {
-        animateTimeline();
-        animateSkillBars();
-        animateProjectCards();
-        animateContactItems();
-        animateProjectShowcase();
+    animateTimeline();
+    animateSkillBars();
+    animateProjectCards();
+    animateContactItems();
+    animateProjectShowcase();
+    animateTechItems(); // Add this line
     }
 
     // Check animations on load and scroll
     checkAnimations();
     window.addEventListener('scroll', checkAnimations);
-
-    // Initialize project tabs
     initProjectTabs();
+
+    window.addEventListener('resize', function () {
+        document.querySelectorAll('.project-showcase .swiper').forEach(swiperEl => {
+            if (swiperEl.swiper) {
+                swiperEl.swiper.update();
+            }
+        });
+    });
 
     // Intersection Observer for fade-in animations
     const observerOptions = {
@@ -464,7 +489,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize animations when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
         setupTypingAnimation();
-        initProjectTabs();
     });
 
     // Initialize EmailJS
@@ -513,4 +537,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
             });
     });
-}); 
+});
